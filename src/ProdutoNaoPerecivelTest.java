@@ -18,13 +18,13 @@ public class ProdutoNaoPerecivelTest {
     
     @Test
     public void calculaPrecoCorretamente(){
-        assertEquals(110.0, produto.valorDeVenda(), 0.01);
+        assertEquals(110.0, produto.valorVenda(), 0.01);
     }
 
     @Test
     public void stringComDescricaoEValor(){
         String desc = produto.toString();
-        assertTrue(desc.contains("Produto teste") && desc.contains("R$ 110,00"));
+        assertTrue(desc.contains("Produto teste") && desc.contains("R$ 110,00"));
     }
 
     @Test
@@ -42,12 +42,13 @@ public class ProdutoNaoPerecivelTest {
         String linhaDados = "1;Produto do arquivo;10.0;0.1";
         produto = Produto.criarDoTexto(linhaDados);
         String desc = produto.toString();
-        assertTrue(desc.contains("Produto do arquivo") && desc.contains("R$ 11,00"));
+        assertTrue(desc.contains("Produto do arquivo") && desc.contains("R$ 11,00"));
     }
 
     @Test
     public void criaDadosEmTextoCorretamente(){
         assertEquals("1;Produto teste;100.00;0.10", produto.gerarDadosTexto());
+        System.out.println(">>" + produto.toString() + "<<");
         
     }
 }

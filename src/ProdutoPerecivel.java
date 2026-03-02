@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.*;
+import java.util.Locale;
 
 public class ProdutoPerecivel extends Produto {
 
@@ -22,23 +23,22 @@ public class ProdutoPerecivel extends Produto {
         if(LocalDate.now().isAfter(dataValidade)){
             throw new IllegalArgumentException("O produto deve estar na data de validade!!!");
         }
-        if(ChronoUnit.DAYS.between(dataValidade, LocalDate.now()) <= 7){
+        if(ChronoUnit.DAYS.between(LocalDate.now(), dataValidade) <= 7){
             return precoCusto * (1 + margemLucro) - (precoCusto * (1 + margemLucro) * 0.25);
         }else{
             return precoCusto * (1 + margemLucro);
         }
     }
-
     @Override
     public String toString() {
-        
-        StringBuilder desc = new StringBuilder(super.toString()).append(", valor venda= R$")
-        .append(", valor venda= R$")
-        .append(String.format("%.2f", valorVenda()).replace(".", ","))
-        .append(", data validade = ")
-        .append(formato.format(dataValidade))
-        .append("}");
-        return desc.toString();
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        return super.toString()
+                + ", valor venda= R$ "
+                + String.format(Locale.US, "%.2f", valorVenda()).replace(".", ",")
+                + ", data validade="
+                + formato.format(dataValidade)
+                + "}";
     }
 
     @Override

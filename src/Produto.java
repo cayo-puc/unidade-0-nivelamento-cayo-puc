@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
 public abstract class Produto {
 
     private static final double MARGEM_PADRAO = 0.2;
@@ -38,8 +42,8 @@ public abstract class Produto {
         Double margem = Double.parseDouble(partes[3]);
         if(tipo == 1){
             novoProduto = new ProdutoNaoPerecivel(desc, preco, margem);
-        }else if(partes[0] == 2){
-            LocalDate data = LocalDate.parse(partes[4])
+        }else if(tipo == 2){
+            LocalDate data = LocalDate.parse(partes[4], formatoData);
             novoProduto = new ProdutoPerecivel(desc, preco, margem, data);
         }else{
             throw new IllegalArgumentException ("O tipo do produto não existe");
@@ -50,14 +54,12 @@ public abstract class Produto {
     // Calcula o valor de venda com base no custo e na margem
     public abstract double valorVenda();
 
-    public abstract String gerarDadosTexto();
-
     @Override
     public String toString() {
         return "Produto{" +
                 "descricao='" + descricao + '\'' +
-                ", precoCusto=" + precoCusto +
-                ", margemLucro=" + margemLucro + ", descrição=" + descricao;
+                ", precoCusto=" + String.format(Locale.US, "%.2f", precoCusto).replace(".", ",") +
+                ", margemLucro=" + String.format(Locale.US, "%.2f", margemLucro).replace(".", ",");
     }
 
     @Override

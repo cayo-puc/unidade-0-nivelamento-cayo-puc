@@ -21,13 +21,13 @@ public class ProdutoPerecivelTest {
     
     @Test
     public void calculaPrecoSemDescontoCorretamente(){
-        assertEquals(110.0, produto.valorDeVenda(), 0.01);
+        assertEquals(110.0, produto.valorVenda(), 0.01);
     }
     
     @Test
     public void calculaPrecoComDescontoCorretamente(){
         produto = new ProdutoPerecivel("Perecível teste", 100, 0.1, LocalDate.now().plusDays(2));
-        assertEquals(110.0 * 0.75, produto.valorDeVenda(), 0.01);
+        assertEquals(110.0 * 0.75, produto.valorVenda(), 0.01);
     }
     
     @Test
@@ -37,10 +37,10 @@ public class ProdutoPerecivelTest {
 
     @Test
     public void criarCorretamenteAPartirDeTexto(){
-        String linhaDados = "2;Produto perecível do arquivo;10.0;0.2;25/10/2025";
+        String linhaDados = "2;Produto perecível do arquivo;10.0;0.2;25/10/2026";
         produto = Produto.criarDoTexto(linhaDados);
         String desc = produto.toString();
-        assertTrue(desc.contains("Produto perecível do arquivo") && desc.contains("R$ 12,00") && desc.contains("25/10/2025"));
+        assertTrue(desc.contains("Produto perecível do arquivo") && desc.contains("R$ 12,00") && desc.contains("25/10/2026"));
     }
 
     @Test
