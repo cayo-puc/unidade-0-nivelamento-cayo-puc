@@ -26,7 +26,7 @@ public class ProdutoNaoPerecivelTest {
     @Test
     public void stringComDescricaoEValor(){
         String desc = produto.toString();
-        assertTrue(desc.contains("Produto teste") && desc.contains("R$") && desc.contains("110.00"));
+        assertTrue(desc.contains("Produto teste") && desc.contains("R$") && desc.contains("110,00"));
     }
 
     @Test
