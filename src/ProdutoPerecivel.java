@@ -9,8 +9,8 @@ public class ProdutoPerecivel extends Produto {
     private static final int prazo = 7;
     private LocalDate dataValidade;
 
-    public ProdutoPerecivel(String desc, double precoCusto, double margemLucro, LocalDate dataValidade){
-        super(desc, precoCusto, margemLucro);
+    public ProdutoPerecivel(String desc, double precoCusto, double margemLucro, LocalDate dataValidade, int quantidade){
+        super(desc, precoCusto, margemLucro, quantidade);
         if(LocalDate.now().isAfter(dataValidade)){
             throw new IllegalArgumentException("O produto deve estar na data de validade!!!");
         }else{
